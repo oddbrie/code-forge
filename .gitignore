@@ -205,3 +205,18 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+# Kotlin / Java
+*.class
+
+# Gradle build files
+.gradle/
+build/
+
+# IntelliJ / Android Studio
+.idea/
+*.iml
+out/
+
+# Mac system files
+.DS_Store
