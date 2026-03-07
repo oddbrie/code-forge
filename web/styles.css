@@ -1,6 +1,6 @@
 body {
     margin: 0;
-    font-family: Georgia, serif;
+    font-family: Copperplate, Monaco, Arial, sans-serif;
     font-size: 16px;
     background-color: #1b1b1b;
     color: #eae1e1;
@@ -75,21 +75,21 @@ body {
     color: #f70101;
     text-shadow: 1px 1px 0 white;
     text-align: center;
-    font-size: 28px;
+    font-size: 24px;
     line-height: 1.2;
 }
 
 .widget .meta {
     margin: 0 0 14px 0;
     color: #bdbdbd;
-    font-size: 12px;
+    font-size: 10px;
     text-align: center;
 }
 
 .widget .preview {
     margin: 0 auto 16px auto;
     color: #e6e6e6;
-    font-size: 18px;
+    font-size: 14px;
     line-height: 1.55;
     max-width: 340px;
     text-align: center;
