@@ -79,3 +79,4 @@ A collection of mobile apps built with Kotlin.
 ## 🚧 Status
 
 🔥 Actively forging projects and refining my skills.
+
