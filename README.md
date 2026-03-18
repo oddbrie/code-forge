@@ -1,4 +1,4 @@
-# 🔥 Forged by Aubz
+# 🔥 Forged by Aubrie [Oddbrie]
 
 Where ideas are forged into functional code.
 
