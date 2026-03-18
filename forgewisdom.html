@@ -1,926 +1,232 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Code Forgery WISDOM</title>
-  <style>
-    :root {
-      --bg: #f4f7fb;
-      --panel: #ffffff;
-      --text: #18212f;
-      --muted: #5d6b82;
-      --border: #d9e2ef;
-      --heading: #0f172a;
-      --code-bg: #0f172a;
-      --code-text: #e5edf8;
-      --accent: #2563eb;
-      --soft: #eff6ff;
-      --soft-2: #f8fafc;
-      --shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
-      --radius: 18px;
-    }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Forge Wisdom</title>
+  </head>
 
-    * { box-sizing: border-box; }
-
-    body {
-      margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
-      background: linear-gradient(180deg, #f8fbff 0%, var(--bg) 100%);
-      color: var(--text);
-      line-height: 1.55;
-    }
-
-    .container {
-      width: min(1200px, calc(100% - 32px));
-      margin: 0 auto;
-      padding: 24px 0 48px;
-    }
-
-    .hero {
-      background: linear-gradient(135deg, #0f172a, #1d4ed8);
-      color: white;
-      border-radius: 28px;
-      padding: 32px;
-      box-shadow: var(--shadow);
-      margin-bottom: 24px;
-    }
-
-    .hero h1 {
-      margin: 0 0 12px;
-      font-size: clamp(2rem, 4vw, 3.3rem);
-    }
-
-    .hero p {
-      margin: 0;
-      max-width: 900px;
-      color: rgba(255,255,255,0.92);
-      font-size: 1.05rem;
-    }
-
-    .top-grid {
-      display: grid;
-      grid-template-columns: 1.35fr 0.9fr;
-      gap: 20px;
-      margin-bottom: 24px;
-    }
-
-    .card, .example {
-      background: var(--panel);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-    }
-
-    .card {
-      padding: 22px;
-    }
-
-    .example {
-      padding: 22px;
-      margin-bottom: 18px;
-    }
-
-    h1, h2, h3, h4 { color: var(--heading); }
-
-    h2.section-title {
-      margin: 0 0 8px;
-      font-size: 1.8rem;
-    }
-
-    .section-subtitle {
-      margin: 0 0 20px;
-      color: var(--muted);
-    }
-
-    .quick-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 16px;
-    }
-
-    .quick-links a {
-      text-decoration: none;
-      color: var(--accent);
-      background: var(--soft);
-      border: 1px solid #bfdbfe;
-      padding: 9px 13px;
-      border-radius: 999px;
-      font-weight: bold;
-      font-size: 0.92rem;
-    }
-
-    .section {
-      margin: 28px 0;
-    }
-
-    .example-header {
-      margin-bottom: 16px;
-    }
-
-    .example-header h3 {
-      margin: 0 0 6px;
-      font-size: 1.25rem;
-    }
-
-    .example-header p {
-      margin: 0 0 10px;
-      color: var(--muted);
-    }
-
-    .tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-
-    .tag {
-      background: #f1f5f9;
-      border: 1px solid #e2e8f0;
-      border-radius: 999px;
-      padding: 6px 10px;
-      font-size: 0.82rem;
-      color: #334155;
-    }
-
-    .two-col {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 18px;
-      align-items: start;
-    }
-
-    .three-col {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-    }
-
-    .pane-title {
-      font-weight: bold;
-      margin-bottom: 10px;
-      font-size: 0.95rem;
-    }
-
-    pre {
-      margin: 0;
-      background: var(--code-bg);
-      color: var(--code-text);
-      padding: 16px;
-      border-radius: 16px;
-      overflow-x: auto;
-      font-size: 0.91rem;
-      line-height: 1.45;
-    }
-
-    .preview {
-      border: 1px solid var(--border);
-      background: white;
-      border-radius: 16px;
-      padding: 16px;
-      min-height: 160px;
-    }
-
-    .note {
-      margin-top: 14px;
-      border-left: 4px solid var(--accent);
-      background: #f8fbff;
-      padding: 14px 16px;
-      border-radius: 12px;
-      color: #334155;
-    }
-
-    .mini-card {
-      background: var(--soft-2);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 14px;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      background: white;
-      overflow: hidden;
-      border-radius: 12px;
-    }
-
-    th, td {
-      border: 1px solid var(--border);
-      padding: 12px;
-      text-align: left;
-      vertical-align: top;
-    }
-
-    th {
-      background: #eff6ff;
-    }
-
-    .sample-layout {
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      overflow: hidden;
-      background: white;
-    }
-
-    .sample-layout header,
-    .sample-layout nav,
-    .sample-layout footer,
-    .sample-layout .content,
-    .sample-layout aside {
-      padding: 12px;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .sample-layout nav { background: #f8fafc; }
-    .sample-layout footer { border-bottom: 0; background: #f8fafc; }
-    .layout-main {
-      display: grid;
-      grid-template-columns: 2fr 1fr;
-    }
-
-    .layout-main .content,
-    .layout-main aside {
-      border-bottom: 0;
-    }
-
-    .layout-main aside {
-      border-left: 1px solid var(--border);
-      background: #fcfdff;
-    }
-
-    .demo-flex {
-      display: flex;
-      gap: 10px;
-    }
-
-    .demo-flex div,
-    .demo-grid div,
-    .pill {
-      padding: 12px;
-      border-radius: 12px;
-      border: 1px solid #bfdbfe;
-      background: #dbeafe;
-      text-align: center;
-    }
-
-    .demo-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 10px;
-    }
-
-    .pill-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 12px;
-    }
-
-    .pill {
-      background: #eef2ff;
-      border-color: #c7d2fe;
-      padding: 8px 10px;
-      font-size: 0.88rem;
-    }
-
-    .footer {
-      margin-top: 28px;
-      text-align: center;
-      color: var(--muted);
-      font-size: 0.95rem;
-    }
-
-    @media (max-width: 980px) {
-      .top-grid, .two-col, .three-col, .layout-main {
-        grid-template-columns: 1fr;
-      }
-
-      .layout-main aside {
-        border-left: 0;
-        border-top: 1px solid var(--border);
-      }
-    }
-  </style>
-</head>
-<body>
-  <div class="container">
-    <section class="hero">
-      <h1>Code Forgery "Wisdomsheet"</h1>
+  <body>
+    <header>
+      <h1>Forge Wisdom 🔥</h1>
       <p>
-        This is a detailed, non-interactive study page. It shows common HTML, CSS, and JavaScript concepts with example code on one side and the visual result on the other. It is designed as a reference page you can scroll through while studying web fundamentals, with extra context for Kotlin, Java, and Python developers.
+        A personal knowledge archive where I break down concepts, ideas, and
+        lessons I’ve learned while developing my skills as a software developer.
       </p>
-    </section>
+      <nav>
+        <ul>
+          <li><a href="#web-basics">Web Basics</a></li>
+          <li><a href="#html-knowledge">HTML Knowledge</a></li>
+          <li><a href="#css-styling">CSS Styling</a></li>
+          <li><a href="#javascript-concepts">JavaScript Concepts</a></li>
+          <li><a href="#developer-thinking">Developer Thinking</a></li>
+        </ul>
+      </nav>
+    </header>
 
-    <section class="top-grid">
-      <div class="card">
-        <h2>How to use this page</h2>
-        <p>Read each section top to bottom. The left panel shows what the code looks like in a real file. The right panel shows what that code would produce in the browser. This page is intentionally static, so it behaves like a polished example/reference page instead of a playground.</p>
-        <div class="quick-links">
-          <a href="#html-basics">HTML Basics</a>
-          <a href="#semantic-html">Semantic HTML</a>
-          <a href="#forms">Forms</a>
-          <a href="#css-basics">CSS Basics</a>
-          <a href="#layout">Layout</a>
-          <a href="#javascript">JavaScript</a>
-          <a href="#backend-map">Backend Map</a>
-        </div>
-        <div class="note">
-          Best mental model: <strong>HTML gives structure</strong>, <strong>CSS controls appearance and layout</strong>, and <strong>JavaScript adds behavior</strong>.
-        </div>
-      </div>
+    <hr />
 
-      <div class="card">
-        <h2>Quick language roles</h2>
-        <table>
-          <thead>
-            <tr><th>Language</th><th>Main purpose</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>HTML</td><td>Defines page structure and content meaning</td></tr>
-            <tr><td>CSS</td><td>Controls colors, spacing, sizing, positioning, layout</td></tr>
-            <tr><td>JavaScript</td><td>Handles interaction, DOM updates, events, API calls</td></tr>
-            <tr><td>Kotlin / Java / Python</td><td>Usually used on the backend, app logic, APIs, automation, or data processing</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
+    <main>
 
-    <section id="html-basics" class="section">
-      <h2 class="section-title">HTML Basics</h2>
-      <p class="section-subtitle">HTML is the structure of a webpage. Think of it like the labeled building blocks of the page.</p>
+      <!-- Web Basics -->
+      <section id="web-basics">
+        <h2>Web Basics 🌐</h2>
 
-      <article class="example">
-        <div class="example-header">
-          <h3>Headings and Paragraphs</h3>
-          <p>Headings communicate structure. Paragraphs contain body text. Search engines, screen readers, and developers all benefit from clear heading structure.</p>
-          <div class="tags">
-            <span class="tag">h1</span><span class="tag">h2</span><span class="tag">h3</span><span class="tag">p</span>
-          </div>
-        </div>
-        <div class="two-col">
-          <div>
-            <div class="pane-title">Code Example</div>
-            <pre>&lt;h1&gt;Portfolio Website&lt;/h1&gt;
-&lt;h2&gt;About Me&lt;/h2&gt;
-&lt;p&gt;I am a software developer learning web fundamentals.&lt;/p&gt;
-&lt;h2&gt;Projects&lt;/h2&gt;
-&lt;p&gt;Here are a few things I have built recently.&lt;/p&gt;</pre>
-          </div>
-          <div>
-            <div class="pane-title">Rendered Result</div>
-            <div class="preview">
-              <h1>Portfolio Website</h1>
-              <h2>About Me</h2>
-              <p>I am a software developer learning web fundamentals.</p>
-              <h2>Projects</h2>
-              <p>Here are a few things I have built recently.</p>
-            </div>
-          </div>
-        </div>
-      </article>
+        <h3>What happens when you visit a website</h3>
 
-      <article class="example">
-        <div class="example-header">
-          <h3>Links, Images, and Lists</h3>
-          <p>Links connect documents. Images display media. Lists group related items without forcing a table layout.</p>
-          <div class="tags">
-            <span class="tag">a</span><span class="tag">img</span><span class="tag">ul</span><span class="tag">ol</span><span class="tag">li</span>
-          </div>
-        </div>
-        <div class="two-col">
-          <div>
-            <div class="pane-title">Code Example</div>
-            <pre>&lt;a href="https://google.com"&gt;Search Google&lt;/a&gt;
+        <p>Meaning:</p>
+        <p></p>
 
-&lt;img src="https://as2.ftcdn.net/jpg/04/23/11/95/1000_F_423119533_FJdXQOKBWf
-6yUbmol37EfRTC9VbNHosN.jpg" alt="hello there" style="max-width: 100%; height: auto;"&gt;
+        <p>Why it matters:</p>
+        <p></p>
 
-&lt;ul&gt;
-  &lt;li&gt;HTML&lt;/li&gt;
-  &lt;li&gt;CSS&lt;/li&gt;
-  &lt;li&gt;JavaScript&lt;/li&gt;
-&lt;/ul&gt;
+        <p>Real-world example:</p>
+        <p></p>
 
-&lt;ol&gt;
-  &lt;li&gt;Plan layout&lt;/li&gt;
-  &lt;li&gt;Write markup&lt;/li&gt;
-  &lt;li&gt;Style the page&lt;/li&gt;
-&lt;/ol&gt;</pre>
-          </div>
-          <div>
-            <div class="pane-title">Rendered Result</div>
-            <div class="preview">
-              <a href="https://google.com">Search Google</a>
-              <p></p>
-              <img src="https://as2.ftcdn.net/jpg/04/23/11/95/1000_F_423119533_FJdXQOKBWf6yUbmol37EfRTC9VbNHosN.jpg" alt="hello there" style="max-width: 100%; height: auto;">
-              <ul>
-                <li>HTML</li>
-                <li>CSS</li>
-                <li>JavaScript</li>
-              </ul>
-              <ol>
-                <li>Plan layout</li>
-                <li>Write markup</li>
-                <li>Style the page</li>
-              </ol>
-            </div>
-          </div>
-        </div>
-      </article>
+        <p>My Note:</p>
+        <p></p>
 
-      <article class="example">
-        <div class="example-header">
-          <h3>Tables</h3>
-          <p>Use tables only for actual row-and-column data, such as schedules, metrics, prices, or records.</p>
-          <div class="tags">
-            <span class="tag">table</span><span class="tag">tr</span><span class="tag">th</span><span class="tag">td</span>
-          </div>
-        </div>
-        <div class="two-col">
-          <div>
-            <div class="pane-title">Code Example</div>
-            <pre>&lt;table&gt;
-  &lt;tr&gt;
-    &lt;th&gt;Name&lt;/th&gt;
-    &lt;th&gt;Role&lt;/th&gt;
-    &lt;th&gt;Primary Stack&lt;/th&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-    &lt;td&gt;Aubrie&lt;/td&gt;
-    &lt;td&gt;Developer&lt;/td&gt;
-    &lt;td&gt;Kotlin / Web&lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-    &lt;td&gt;Rae&lt;/td&gt;
-    &lt;td&gt;Designer&lt;/td&gt;
-    &lt;td&gt;CSS / UX&lt;/td&gt;
-  &lt;/tr&gt;
-&lt;/table&gt;</pre>
-          </div>
-          <div>
-            <div class="pane-title">Rendered Result</div>
-            <div class="preview">
-              <table>
-                <tr>
-                  <th>Name</th>
-                  <th>Role</th>
-                  <th>Primary Stack</th>
-                </tr>
-                <tr>
-                  <td>Aubrie</td>
-                  <td>Developer</td>
-                  <td>Kotlin / Web</td>
-                </tr>
-                <tr>
-                  <td>Rae</td>
-                  <td>Designer</td>
-                  <td>CSS / UX</td>
-                </tr>
-              </table>
-            </div>
-          </div>
-        </div>
-      </article>
-    </section>
+        <hr />
 
-    <section id="semantic-html" class="section">
-      <h2 class="section-title">Semantic HTML</h2>
-      <p class="section-subtitle">Semantic tags describe what a section means, not just how it looks. This improves accessibility, maintainability, and SEO.</p>
+        <h3>Browser vs Server</h3>
 
-      <article class="example">
-        <div class="example-header">
-          <h3>Page Structure with Meaningful Tags</h3>
-          <p>Instead of using generic <code>div</code> tags everywhere, use more descriptive elements when appropriate.</p>
-          <div class="tags">
-            <span class="tag">header</span><span class="tag">nav</span><span class="tag">main</span><span class="tag">section</span><span class="tag">article</span><span class="tag">aside</span><span class="tag">footer</span>
-          </div>
-        </div>
-        <div class="two-col">
-          <div>
-            <div class="pane-title">Code Example</div>
-            <pre>&lt;header&gt;My Site&lt;/header&gt;
-&lt;nav&gt;Home | Projects | Contact&lt;/nav&gt;
-&lt;main&gt;
-  &lt;section&gt;
-    &lt;article&gt;
-      Featured article content
-    &lt;/article&gt;
-  &lt;/section&gt;
-  &lt;aside&gt;
-    Related links
-  &lt;/aside&gt;
-&lt;/main&gt;
-&lt;footer&gt;Copyright 2026&lt;/footer&gt;</pre>
-          </div>
-          <div>
-            <div class="pane-title">Rendered Result</div>
-            <div class="preview">
-              <div class="sample-layout">
-                <header><strong>My Site</strong></header>
-                <nav>Home | Projects | Contact</nav>
-                <div class="layout-main">
-                  <div class="content">
-                    <strong>Featured article content</strong>
-                    <p>This represents the main page content.</p>
-                  </div>
-                  <aside>
-                    <strong>Related links</strong>
-                    <p>Helpful side information lives here.</p>
-                  </aside>
-                </div>
-                <footer>Copyright 2026</footer>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="note">
-          A <strong>div</strong> is still useful as a generic container. But when the content has a clear purpose, semantic tags make the document easier to understand for both humans and tools.
-        </div>
-      </article>
-    </section>
+        <p>Meaning:</p>
+        <p></p>
 
-    <section id="forms" class="section">
-      <h2 class="section-title">Forms and Inputs</h2>
-      <p class="section-subtitle">Forms collect user information. Good forms pair labels with controls and group related fields clearly.</p>
+        <p>Why it matters:</p>
+        <p></p>
 
-      <article class="example">
-        <div class="example-header">
-          <h3>Contact Form Example</h3>
-          <p>This shows the most common form-related elements in one place.</p>
-          <div class="tags">
-            <span class="tag">form</span><span class="tag">label</span><span class="tag">input</span><span class="tag">select</span><span class="tag">textarea</span><span class="tag">button</span>
-          </div>
-        </div>
-        <div class="two-col">
-          <div>
-            <div class="pane-title">Code Example</div>
-            <pre>&lt;form&gt;
-  &lt;label for="name"&gt;Name&lt;/label&gt;
-  &lt;input id="name" type="text"&gt;
+        <p>Real-world example:</p>
+        <p></p>
 
-  &lt;label for="email"&gt;Email&lt;/label&gt;
-  &lt;input id="email" type="email"&gt;
+        <p>My Note:</p>
+        <p></p>
 
-  &lt;label for="topic"&gt;Topic&lt;/label&gt;
-  &lt;select id="topic"&gt;
-    &lt;option&gt;Frontend&lt;/option&gt;
-    &lt;option&gt;Backend&lt;/option&gt;
-  &lt;/select&gt;
+        <hr />
 
-  &lt;label for="message"&gt;Message&lt;/label&gt;
-  &lt;textarea id="message"&gt;&lt;/textarea&gt;
+        <h3>Request vs Response</h3>
 
-  &lt;button type="submit"&gt;Send&lt;/button&gt;
-&lt;/form&gt;</pre>
-          </div>
-          <div>
-            <div class="pane-title">Rendered Result</div>
-            <div class="preview">
-              <form>
-                <label for="name-example">Name</label><br>
-                <input id="name-example" type="text" style="width:100%; padding:8px; margin:6px 0 12px;"><br>
-                <label for="email-example">Email</label><br>
-                <input id="email-example" type="email" style="width:100%; padding:8px; margin:6px 0 12px;"><br>
-                <label for="topic-example">Topic</label><br>
-                <select id="topic-example" style="width:100%; padding:8px; margin:6px 0 12px;">
-                  <option>Frontend</option>
-                  <option>Backend</option>
-                </select><br>
-                <label for="message-example">Message</label><br>
-                <textarea id="message-example" style="width:100%; padding:8px; margin:6px 0 12px; min-height:90px;"></textarea><br>
-                <button type="button" style="padding:10px 14px;">Send</button>
-              </form>
-            </div>
-          </div>
-        </div>
-        <div class="note">
-          Labels matter. They make forms easier to use, and they help accessibility tools correctly announce what each input is for.
-        </div>
-      </article>
-    </section>
+        <p>Meaning:</p>
+        <p></p>
 
-    <section id="css-basics" class="section">
-      <h2 class="section-title">CSS Basics</h2>
-      <p class="section-subtitle">CSS styles HTML. You use it to change spacing, typography, color, borders, and layout behavior.</p>
+        <p>Why it matters:</p>
+        <p></p>
 
-      <article class="example">
-        <div class="example-header">
-          <h3>Basic Styling Rules</h3>
-          <p>This is the kind of CSS you write every day when building UI.</p>
-          <div class="tags">
-            <span class="tag">color</span><span class="tag">background</span><span class="tag">font-size</span><span class="tag">padding</span><span class="tag">border</span><span class="tag">border-radius</span>
-          </div>
-        </div>
-        <div class="two-col">
-          <div>
-            <div class="pane-title">Code Example</div>
-            <pre>.notice {
-  color: #1d4ed8;
-  background: #eff6ff;
-  font-size: 20px;
-  font-weight: bold;
-  padding: 16px;
-  border: 2px solid #93c5fd;
-  border-radius: 12px;
-}</pre>
-          </div>
-          <div>
-            <div class="pane-title">Rendered Result</div>
-            <div class="preview">
-              <div style="color:#1d4ed8; background:#eff6ff; font-size:20px; font-weight:bold; padding:16px; border:2px solid #93c5fd; border-radius:12px;">
-                Styled notification box
-              </div>
-            </div>
-          </div>
-        </div>
-      </article>
+        <p>Real-world example:</p>
+        <p></p>
 
-      <article class="example">
-        <div class="example-header">
-          <h3>Box Model</h3>
-          <p>Every element is a box. The box model is one of the most important CSS concepts.</p>
-          <div class="tags">
-            <span class="tag">content</span><span class="tag">padding</span><span class="tag">border</span><span class="tag">margin</span>
-          </div>
-        </div>
-        <div class="three-col">
-          <div class="mini-card"><strong>Content</strong><br>The actual text, image, or child elements.</div>
-          <div class="mini-card"><strong>Padding</strong><br>Space between the content and the border.</div>
-          <div class="mini-card"><strong>Border</strong><br>The visible edge around the padded box.</div>
-          <div class="mini-card"><strong>Margin</strong><br>Space outside the border, separating elements from each other.</div>
-          <div class="mini-card"><strong>Width / Height</strong><br>Control the size of the content box unless box-sizing changes the behavior.</div>
-          <div class="mini-card"><strong>Border Radius</strong><br>Rounds corners to make boxes softer.</div>
-        </div>
-      </article>
-    </section>
+        <p>My Note:</p>
+        <p></p>
+      </section>
 
-    <section id="layout" class="section">
-      <h2 class="section-title">Layout: Flexbox, Grid, and Positioning</h2>
-      <p class="section-subtitle">Layout tools help you place content on the page in an intentional, maintainable way.</p>
+      <hr />
 
-      <article class="example">
-        <div class="example-header">
-          <h3>Flexbox</h3>
-          <p>Flexbox is best for one-dimensional layout, such as items in a row or a column.</p>
-          <div class="tags">
-            <span class="tag">display:flex</span><span class="tag">justify-content</span><span class="tag">align-items</span><span class="tag">gap</span>
-          </div>
-        </div>
-        <div class="two-col">
-          <div>
-            <div class="pane-title">Code Example</div>
-            <pre>.toolbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 12px;
-}</pre>
-          </div>
-          <div>
-            <div class="pane-title">Rendered Result</div>
-            <div class="preview">
-              <div class="demo-flex">
-                <div>Logo</div>
-                <div>Search</div>
-                <div>Profile</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </article>
+      <!-- HTML Knowledge -->
+      <section id="html-knowledge">
+        <h2>HTML Knowledge 🧾</h2>
 
-      <article class="example">
-        <div class="example-header">
-          <h3>CSS Grid</h3>
-          <p>Grid is best for two-dimensional layout. It is especially useful for dashboards, galleries, and full-page composition.</p>
-          <div class="tags">
-            <span class="tag">display:grid</span><span class="tag">grid-template-columns</span><span class="tag">gap</span>
-          </div>
-        </div>
-        <div class="two-col">
-          <div>
-            <div class="pane-title">Code Example</div>
-            <pre>.dashboard {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-}</pre>
-          </div>
-          <div>
-            <div class="pane-title">Rendered Result</div>
-            <div class="preview">
-              <div class="demo-grid">
-                <div>Card 1</div>
-                <div>Card 2</div>
-                <div>Card 3</div>
-                <div>Card 4</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </article>
+        <h3>What HTML is for</h3>
 
-      <article class="example">
-        <div class="example-header">
-          <h3>Positioning</h3>
-          <p>Positioning is used when elements must be placed with more precision than normal document flow provides.</p>
-          <div class="tags">
-            <span class="tag">position: relative</span><span class="tag">position: absolute</span><span class="tag">top</span><span class="tag">right</span>
-          </div>
-        </div>
-        <div class="two-col">
-          <div>
-            <div class="pane-title">Code Example</div>
-            <pre>.parent {
-  position: relative;
-}
+        <p>Meaning:</p>
+        <p></p>
 
-.badge {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-}</pre>
-          </div>
-          <div>
-            <div class="pane-title">Rendered Result</div>
-            <div class="preview">
-              <div style="position:relative; height:160px; border:1px solid #cbd5e1; border-radius:12px; padding:16px; background:#f8fafc;">
-                Product card or notification box
-                <div style="position:absolute; top:10px; right:10px; background:#fef3c7; border:1px solid #f59e0b; padding:8px 10px; border-radius:10px;">
-                  New
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="note">
-          Use positioning carefully. Most layouts are easier to maintain with flexbox or grid than with lots of absolute positioning.
-        </div>
-      </article>
-    </section>
+        <p>Why it matters:</p>
+        <p></p>
 
-    <section id="javascript" class="section">
-      <h2 class="section-title">JavaScript Concepts</h2>
-      <p class="section-subtitle">This page is static, but you still need to know what JavaScript does in real projects.</p>
+        <p>Real-world example:</p>
+        <p></p>
 
-      <article class="example">
-        <div class="example-header">
-          <h3>DOM Update Example</h3>
-          <p>JavaScript can find an element and change its text, classes, styles, attributes, or content after a user action.</p>
-          <div class="tags">
-            <span class="tag">document.getElementById</span><span class="tag">textContent</span><span class="tag">addEventListener</span>
-          </div>
-        </div>
-        <div class="two-col">
-          <div>
-            <div class="pane-title">Code Example</div>
-            <pre>&lt;button id="btn"&gt;Click me&lt;/button&gt;
-&lt;p id="status"&gt;Waiting...&lt;/p&gt;
+        <p>My Note:</p>
+        <p></p>
 
-const btn = document.getElementById("btn");
-const status = document.getElementById("status");
+        <hr />
 
-btn.addEventListener("click", () =&gt; {
-  status.textContent = "Button clicked.";
-});</pre>
-          </div>
-          <div>
-            <div class="pane-title">What Happens</div>
-            <div class="preview">
-              <button style="padding:10px 14px;">Click me</button>
-              <p>Waiting...</p>
-              <div class="note" style="margin-top:12px;">
-                In a real page, clicking the button would change the paragraph text from <strong>Waiting...</strong> to <strong>Button clicked.</strong>
-              </div>
-            </div>
-          </div>
-        </div>
-      </article>
+        <h3>Semantic Structure</h3>
 
-      <article class="example">
-        <div class="example-header">
-          <h3>Common JavaScript Jobs in Web Apps</h3>
-          <p>JavaScript is not just for buttons. It often connects the user interface to backend APIs.</p>
-        </div>
-        <div class="three-col">
-          <div class="mini-card"><strong>Event handling</strong><br>Click, input, submit, hover, keyboard events.</div>
-          <div class="mini-card"><strong>DOM updates</strong><br>Change text, show or hide sections, render lists, swap classes.</div>
-          <div class="mini-card"><strong>API calls</strong><br>Request JSON from a server and display the returned data.</div>
-          <div class="mini-card"><strong>Validation</strong><br>Check that form values are complete and correct before submitting.</div>
-          <div class="mini-card"><strong>State changes</strong><br>Track toggles, tabs, selected items, cart contents, filters.</div>
-          <div class="mini-card"><strong>Async behavior</strong><br>Wait for responses, timers, uploads, or background processes.</div>
-        </div>
-      </article>
-    </section>
+        <p>Meaning:</p>
+        <p></p>
 
-    <section id="backend-map" class="section">
-      <h2 class="section-title">Mapping Web Concepts to Kotlin, Java, and Python</h2>
-      <p class="section-subtitle">Since you are already in software development, this section connects frontend ideas to the backend and app-development perspective.</p>
+        <p>Why it matters:</p>
+        <p></p>
 
-      <article class="example">
-        <div class="example-header">
-          <h3>Frontend ↔ Backend Flow</h3>
-          <p>The browser displays UI, but it often depends on a backend service for real data and business logic.</p>
-        </div>
-        <div class="two-col">
-          <div>
-            <div class="pane-title">Concept Flow</div>
-            <pre>Browser page (HTML/CSS/JS)
-        ↓
-User clicks button or submits form
-        ↓
-Frontend sends request to API
-        ↓
-Backend validates, processes, reads database
-        ↓
-Backend returns JSON response
-        ↓
-Frontend updates the page</pre>
-          </div>
-          <div>
-            <div class="pane-title">Why this matters</div>
-            <div class="preview">
-              <ul>
-                <li>HTML shows the structure of the page</li>
-                <li>CSS controls how it looks</li>
-                <li>JavaScript decides what happens next</li>
-                <li>Kotlin / Java / Python often power the server-side logic</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </article>
+        <p>Real-world example:</p>
+        <p></p>
 
-      <article class="example">
-        <div class="example-header">
-          <h3>Language Snapshots</h3>
-          <p>Each of these languages can appear in a modern software stack, but they usually play different roles.</p>
-        </div>
-        <div class="three-col">
-          <div class="mini-card">
-            <h4>Kotlin</h4>
-            <pre>fun main() {
-    val user = "Aubrie"
-    println("Hello, $user")
-}</pre>
-            <p>Kotlin is strong for Android and also backend work through frameworks like Ktor and Spring Boot.</p>
-          </div>
-          <div class="mini-card">
-            <h4>Java</h4>
-            <pre>public class Main {
-  public static void main(String[] args) {
-    String user = "Aubrie";
-    System.out.println("Hello, " + user);
-  }
-}</pre>
-            <p>Java is common in enterprise systems, REST APIs, and large-scale backend applications.</p>
-          </div>
-          <div class="mini-card">
-            <h4>Python</h4>
-            <pre>user = "Aubrie"
-print(f"Hello, {user}")</pre>
-            <p>Python is popular for scripting, automation, data work, and backends using Flask or Django.</p>
-          </div>
-        </div>
-      </article>
-    </section>
+        <p>My Note:</p>
+        <p></p>
+      </section>
 
-    <section class="section">
-      <h2 class="section-title">Fast Reference Table</h2>
-      <p class="section-subtitle">A compact summary for choosing the right tool quickly.</p>
-      <div class="card">
-        <table>
-          <thead>
-            <tr>
-              <th>Concept</th>
-              <th>Use it for</th>
-              <th>Example use case</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr><td><code>div</code></td><td>Generic grouping container</td><td>Wrapping cards or layout sections for styling</td></tr>
-            <tr><td><code>section</code></td><td>Thematic grouping of related content</td><td>Features section, testimonials section, contact section</td></tr>
-            <tr><td><code>article</code></td><td>Standalone content block</td><td>Blog post, product card, news item</td></tr>
-            <tr><td><code>form</code></td><td>User input collection</td><td>Login, signup, search, contact page</td></tr>
-            <tr><td>Flexbox</td><td>One-dimensional layout</td><td>Nav bar, toolbar, button row, card row</td></tr>
-            <tr><td>Grid</td><td>Two-dimensional layout</td><td>Dashboard, gallery, pricing layout</td></tr>
-            <tr><td>Positioning</td><td>Precise element placement</td><td>Badge, floating icon, notification dot</td></tr>
-            <tr><td>JavaScript DOM</td><td>Dynamic UI updates</td><td>Click button → change text or open modal</td></tr>
-            <tr><td>API request</td><td>Fetch backend data</td><td>Load users, posts, products, metrics</td></tr>
-          </tbody>
-        </table>
-        <div class="pill-row">
-          <div class="pill">HTML = structure</div>
-          <div class="pill">CSS = presentation</div>
-          <div class="pill">JS = behavior</div>
-          <div class="pill">Backend = logic + data</div>
-        </div>
-      </div>
-    </section>
+      <hr />
 
-    <p class="footer">Save this as <strong>cheatsheet.html</strong> and open it in your browser. It is static, readable, and built to work as a study/reference page.</p>
-  </div>
-</body>
+      <!-- CSS Styling -->
+      <section id="css-styling">
+        <h2>CSS Styling 🎨</h2>
+
+        <h3>What CSS is for</h3>
+
+        <p>Meaning:</p>
+        <p></p>
+
+        <p>Why it matters:</p>
+        <p></p>
+
+        <p>Real-world example:</p>
+        <p></p>
+
+        <p>My Note:</p>
+        <p></p>
+
+        <hr />
+
+        <h3>Layout and Spacing</h3>
+
+        <p>Meaning:</p>
+        <p></p>
+
+        <p>Why it matters:</p>
+        <p></p>
+
+        <p>Real-world example:</p>
+        <p></p>
+
+        <p>My Note:</p>
+        <p></p>
+      </section>
+
+      <hr />
+
+      <!-- JavaScript Concepts -->
+      <section id="javascript-concepts">
+        <h2>JavaScript Concepts ⚡</h2>
+
+        <h3>What JavaScript does</h3>
+
+        <p>Meaning:</p>
+        <p></p>
+
+        <p>Why it matters:</p>
+        <p></p>
+
+        <p>Real-world example:</p>
+        <p></p>
+
+        <p>My Note:</p>
+        <p></p>
+
+        <hr />
+
+        <h3>Events and Interaction</h3>
+
+        <p>Meaning:</p>
+        <p></p>
+
+        <p>Why it matters:</p>
+        <p></p>
+
+        <p>Real-world example:</p>
+        <p></p>
+
+        <p>My Note:</p>
+        <p></p>
+      </section>
+
+      <hr />
+
+      <!-- Developer Thinking -->
+      <section id="developer-thinking">
+        <h2>Developer Thinking 🧠</h2>
+
+        <h3>Problem Solving</h3>
+
+        <p>Meaning:</p>
+        <p></p>
+
+        <p>Why it matters:</p>
+        <p></p>
+
+        <p>Real-world example:</p>
+        <p></p>
+
+        <p>My Note:</p>
+        <p></p>
+
+        <hr />
+
+        <h3>Debugging</h3>
+
+        <p>Meaning:</p>
+        <p></p>
+
+        <p>Why it matters:</p>
+        <p></p>
+
+        <p>Real-world example:</p>
+        <p></p>
+
+        <p>My Note:</p>
+        <p></p>
+      </section>
+
+    </main>
+  </body>
 </html>
