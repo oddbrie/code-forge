@@ -1,0 +1,19 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+section {
+    margin-bottom: 40px;
+}
+
+header {
+    text-align: center;
+}
+
+nav ul {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    list-style: none;
+    padding: 0;
+}
