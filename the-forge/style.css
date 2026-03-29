@@ -1,5 +1,14 @@
 body {
     font-family: Arial, sans-serif;
+    color: white;
+    
+    background-image: url("forge-background.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    min-height: 100vh;
+    margin: 0;
 }
 
 section {
@@ -16,4 +25,52 @@ nav ul {
     gap: 20px;
     list-style: none;
     padding: 0;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+
+    background-color: rgba(0, 0, 0, 0.6);;
+}
+
+h2 {
+    margin-top: 40px;
+}
+
+p {
+    line-height: 1.6;
+}
+
+ol {
+    padding-left: 20px;
+}
+
+li {
+    margin-bottom: 10px;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.logo {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    width: 175px;
+    border-radius: 50%;
+}
+
+.profile {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 275px;
+    border-radius: 50%;
 }
