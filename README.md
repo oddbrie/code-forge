@@ -16,25 +16,25 @@ I focus primarily on **frontend development**, while expanding into **full-stack
 
 ### 🏠 The Forge
 
-My personal portfolio and central hub.
+My personal portfolio and central hub for showcasing projects and growth as a developer.
 
 ⚙️ **Tech:** HTML, CSS, JavaScript  
 🔥 **Status:** Forging...
 
 ---
 
-### 🧠 Focus Engine
+### 🧠 ForgeWisdom
 
-A productivity and task management system.
+A structured knowledge archive for documenting and reinforcing key software development concepts.
 
 ⚙️ **Tech:** HTML, CSS, JavaScript  
-🧪 **Status:** Planned
+🔥 **Status:** Forging...
 
 ---
 
 ### 🌍 Sky Scanner
 
-A weather app powered by live API data.
+A weather application that displays real-time conditions and forecasts using live API data.
 
 ⚙️ **Tech:** HTML, CSS, JavaScript, APIs  
 🧪 **Status:** Planned
@@ -43,27 +43,18 @@ A weather app powered by live API data.
 
 ### ⚙️ Iron Core
 
-A backend system for handling data and logic.
+A backend system that handles application logic, data processing, and REST API development.
 
-⚙️ **Tech:** Java, Spring Boot (planned)  
-🧪 **Status:** Planned
-
----
-
-### 🔗 Iron API
-
-A REST API for managing and processing data.
-
-⚙️ **Tech:** Java, REST architecture  
+⚙️ **Tech:** Java, Spring Boot (planned), REST architecture  
 🧪 **Status:** Planned
 
 ---
 
 ### 📱 Pocket Forge
 
-A collection of mobile apps built with Kotlin.
+A productivity-focused application for managing tasks and accessing useful tools in one place.
 
-⚙️ **Tech:** Kotlin, Android Studio  
+⚙️ **Tech:** HTML, CSS, JavaScript (initial), Kotlin (future)
 🧪 **Status:** Planned
 
 ---
