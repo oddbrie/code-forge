@@ -1,4 +1,4 @@
-# ⚙️ Iron Core
+# ⚙️ Forge Core
 
 A backend system for handling application logic, data processing, and REST API development.
 
@@ -6,7 +6,7 @@ A backend system for handling application logic, data processing, and REST API d
 
 ## 🎯 Purpose
 
-Iron Core is designed to power applications by managing core business logic, handling data, and exposing functionality through a structured API.
+Forge Core is designed to power applications by managing core business logic, handling data, and exposing functionality through a structured API.
 
 ---
 

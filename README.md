@@ -6,9 +6,11 @@ Where ideas are forged into functional code.
 
 ## 🧠 About
 
-This repository is my **Code Forge** — a structured collection of projects I’m building to strengthen my real-world software development skills.
+This repository is my **Code Forge** — a structured collection of projects designed to grow from frontend applications into full-stack software.
 
-I focus primarily on **frontend development**, while expanding into **full-stack engineering using Java and Kotlin**.
+Each project builds on the last, helping me develop stronger skills in **JavaScript, Java, Spring Boot, APIs, databases, and Kotlin** while creating practical, real-world applications.
+
+I focus primarily on frontend development, while actively expanding into backend engineering and full-stack systems.
 
 ---
 
@@ -23,51 +25,40 @@ My personal portfolio and central hub for showcasing projects and growth as a de
 
 ---
 
-### 🧠 ForgeWisdom
+### 📱 Coin Forge
 
-A structured knowledge archive for documenting and reinforcing key software development concepts.
-
-⚙️ **Tech:** HTML, CSS, JavaScript  
-🔥 **Status:** Forging...
-
----
-
-### 🌍 Sky Scanner
-
-A weather application that displays real-time conditions and forecasts using live API data.
-
-⚙️ **Tech:** HTML, CSS, JavaScript, APIs  
-🧪 **Status:** Planned
-
----
-
-### ⚙️ Iron Core
-
-A backend system that handles application logic, data processing, and REST API development.
-
-⚙️ **Tech:** Java, Spring Boot (planned), REST architecture  
-🧪 **Status:** Planned
-
----
-
-### 📱 Pocket Forge
-
-A productivity-focused application for managing tasks and accessing useful tools in one place.
+A personal finance application focused on mortgage tracking and long-term payment planning. 
 
 ⚙️ **Tech:** HTML, CSS, JavaScript (initial), Kotlin (future)
 🧪 **Status:** Planned
 
 ---
 
+### ⚙️ Forge Core
+
+A backend system for building and managing REST APIs, authentication, and data processing services that support my frontend applications.
+
+⚙️ **Tech:** Java, Spring Boot (planned), REST APIs, Databases  
+🧪 **Status:** Planned
+
+---
+
 ## 🛠️ Current Focus
 
-- ⚡ Learning JavaScript more deeply
-- 🎨 Building responsive, polished user interfaces
-- ⚙️ Expanding into backend development with Java
+⚡ Deepening JavaScript fundamentals and architecture
+🎨 Building responsive, accessible user interfaces
+⚙️ Developing backend systems with Java + Spring Boot
+🔗 Learning how frontend and backend systems connect
+📱 Preparing for Kotlin mobile development
+
+---
+
+🚧 Development Philosophy
+
+Each project in the Code Forge is designed to represent progression, not just completion. I focus on building systems that evolve in complexity, moving from UI-focused applications toward fully integrated full-stack solutions.
 
 ---
 
 ## 🚧 Status
 
-🔥 Actively forging projects and refining my skills.
-
+🔥 Actively forging projects, refining fundamentals, and building toward full-stack development. 

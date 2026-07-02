@@ -1,4 +1,4 @@
-# 📱 Pocket Forge
+# 📱 Coin Forge
 
 A productivity-focused application designed for managing tasks and accessing useful tools on the go.
 
@@ -6,7 +6,7 @@ A productivity-focused application designed for managing tasks and accessing use
 
 ## 🎯 Purpose
 
-Pocket Forge is built to help users stay organized and productive by combining task management and practical tools into a single, mobile-friendly experience.
+Coin Forge is built to help users stay organized and productive by combining task management and practical tools into a single, mobile-friendly experience.
 
 ---
 

@@ -129,9 +129,65 @@ a:visited {
     text-transform: uppercase;
 }
 
-#contact {
+#links {
     font-family: "Orbitron", sans-serif;
     clear: both;
     text-align: center;
     margin-top: 60px;
+    margin-bottom: 10px;
+    padding-left: 5px;
+    padding-right: 5px;
+    background-color: rgba(0, 0, 0, 0.45);
+    border: 1px solid rgba (255, 140, 0, 0.35);
+    border-radius: 12px;
+}
+
+footer {
+    text-align: center;
+    position: relative;
+    padding-top: 20px;
+    padding-bottom: 10px;
+}
+
+
+@media (max-width: 1200px) { 
+  header { 
+    display: flex; 
+    flex-wrap: wrap;       
+    justify-content: center; 
+    padding-top: 40px; 
+  } 
+  
+  header h1 { 
+    width: 100%;           
+    font-size: 36px; 
+    letter-spacing: 8px; 
+  } 
+  
+  header p { 
+    width: 100%;           
+    margin-bottom: 30px; 
+  } 
+  
+  .logo { 
+    position: static; 
+    display: inline-block; 
+    vertical-align: middle;
+    width: 200px;          
+    margin: 0 15px;        
+  } 
+  
+  .profile { 
+    position: static; 
+    display: inline-block; 
+    vertical-align: middle;
+    width: 200px;          
+    margin: 0 15px;        
+  } 
+  
+  #projects, #about { 
+    width: 100%; 
+    float: none; 
+    margin-top: 20px; 
+  } 
 }
